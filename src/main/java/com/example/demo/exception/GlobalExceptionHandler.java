@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
         apiResponse.setMessage(errorCode.message);
         return ResponseEntity.badRequest().body(apiResponse);
     }
-
+    //Xử lý ApplicationException
     @ExceptionHandler({ApplicationException.class})
     ResponseEntity<APIResponse> handlingApplicationException(ApplicationException e) {
         APIResponse apiResponse = new APIResponse();

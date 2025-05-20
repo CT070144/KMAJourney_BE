@@ -1,6 +1,8 @@
 package com.example.demo.exception;
 
 
+
+
 public enum ErrorCode {
     USER_EXISTED(1001,"User existed"),
     UNCATEGORIZED_EXCEPTION(9999,"Uncategorized error"),
@@ -8,8 +10,8 @@ public enum ErrorCode {
     PASSWORD_INVALID(1003,"Password must be at least 3 characters"),
     USER_NOT_EXIST(1004,"User not exit"),
     KEY_INVALID(1005,"KEY INVALID"),
-    EMAIL_EXISTED(1006,"Email existed");
-
+    EMAIL_EXISTED(1006,"Email existed"),
+    UNAUTHENTICATED(1007,"unauthenticated");
 
     int code;
     String message;
