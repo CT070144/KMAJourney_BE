@@ -3,18 +3,29 @@ package com.example.demo.controller;
 
 import com.example.demo.dto.request.*;
 import com.example.demo.dto.response.*;
-import com.example.demo.repository.UserRepository;
+
 import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.repository.query.Param;
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 
 import java.util.List;
+import java.util.Objects;
 
+@Slf4j
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
@@ -44,16 +55,26 @@ public class UserController {
                 .build();
     }
     @GetMapping()
+    @PreAuthorize("hasRole('ADMIN')")
     APIResponse<List<UserResponse>> getUsers(){
+
         return APIResponse.<List<UserResponse>>builder()
                 .result(userService.getUsers())
                 .build();
     }
     @GetMapping("/{userID}")
+    @PostAuthorize("returnObject.result.userName == authentication.name")
     APIResponse<UserResponse> getUser(@PathVariable("userID") String userId){
       return APIResponse.<UserResponse>builder()
               .result(userService.getUser(userId))
               .build();
+    }
+    @GetMapping("/my-info")
+    APIResponse<UserResponse> getInfor(){
+       return APIResponse.<UserResponse>builder()
+               .result(userService.getInfor())
+               .build();
+
     }
     @PutMapping("/{userID}")
     APIResponse<UserResponse> updateUser(@PathVariable("userID") String id, @RequestBody @Valid UserUpdateRequest request){

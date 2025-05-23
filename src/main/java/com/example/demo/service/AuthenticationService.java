@@ -22,31 +22,34 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.text.ParseException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Optional;
+import java.util.StringJoiner;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class AuthenticationService {
     UserRepository userRepository;
+    PasswordEncoder passwordEncoder;
     @NonFinal
     @Value("${jwt.signerKey}")
     protected  String SIGNER_KEY;
     public AuthenticationResponse authenticated(AuthenticationRequest request){
 
-        PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(10);
+
 
         User user = userRepository.findByUserName(request.getUsername()).orElseThrow(()->new ApplicationException(ErrorCode.USER_NOT_EXIST));
         boolean authenticated = passwordEncoder.matches(request.getPassword(),user.getPassWord());
         if(!authenticated){
             throw new ApplicationException(ErrorCode.UNAUTHENTICATED);
         }
-        String token = generateToken(request.getUsername());
+        String token = generateToken(user);
 
         return AuthenticationResponse.builder()
                 .authenticated(authenticated)
@@ -56,15 +59,16 @@ public class AuthenticationService {
     }
 
  // 1 JWT gồm Header, Payload, Signature
-    private String generateToken(String username)  {
+    private String generateToken(User user)  {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
 
         JWTClaimsSet jwtClaimSet = new JWTClaimsSet.Builder()
-                .subject(username)
+                .subject(user.getUserName())
+                .claim("userID",user.getId())
                 .issuer("phucnguyen")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()))
-                .claim("customClaim","custom")
+                .claim("scope",buildScope(user)) // nhận diện role qua thuộc tính scope
                 .build();
         Payload payload = new Payload(jwtClaimSet.toJSONObject());
 
@@ -78,6 +82,12 @@ public class AuthenticationService {
           throw new RuntimeException(e);
       }
 
+    }
+    private String buildScope(User user){
+        StringJoiner stringJoiner = new StringJoiner(" ");
+        if(!CollectionUtils.isEmpty(user.getRoles()))
+            user.getRoles().forEach(stringJoiner::add);
+        return stringJoiner.toString();
     }
     public IntrospectResponse introspectToken(IntrospectRequest request) throws JOSEException, ParseException {
         String token = request.getToken();
