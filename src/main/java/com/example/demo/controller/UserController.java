@@ -12,18 +12,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.http.HttpStatus;
+
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
+
 
 
 import java.util.List;
-import java.util.Objects;
+
 
 @Slf4j
 @RestController
@@ -57,7 +54,6 @@ public class UserController {
     @GetMapping()
     @PreAuthorize("hasRole('ADMIN')")
     APIResponse<List<UserResponse>> getUsers(){
-
         return APIResponse.<List<UserResponse>>builder()
                 .result(userService.getUsers())
                 .build();
