@@ -16,7 +16,7 @@ import java.util.Objects;
 public class GlobalExceptionHandler {
 
 
-    @ExceptionHandler({MethodArgumentNotValidException.class})
+    @ExceptionHandler({MethodArgumentNotValidException.class}) //xử lý vi phạm validate anotation
     ResponseEntity<APIResponse> handlingArgumentNotValid(MethodArgumentNotValidException exception) {
         APIResponse apiResponse = new APIResponse();
         ErrorCode errorCode = ErrorCode.KEY_INVALID;
@@ -56,6 +56,7 @@ public class GlobalExceptionHandler {
         );
     }
 
+//sửa message trả về kèm constraint
     private String mapAttribute(String message, Map<String,Object> attributes){
            String minValue = String.valueOf(attributes.get("min"));
           return message.replace("{min}",minValue);
