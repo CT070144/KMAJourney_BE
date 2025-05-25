@@ -1,5 +1,6 @@
 package com.example.demo.dto.response;
 
+import com.example.demo.entity.Role;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +17,5 @@ public class UserResponse {
     String fullName;
     String email;
     String userName;
-
-
-    Set<String> roles;
+    Set<Role> roles;
 }

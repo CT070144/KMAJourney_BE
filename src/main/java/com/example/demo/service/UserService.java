@@ -10,6 +10,7 @@ import com.example.demo.entity.User;
 import com.example.demo.enums.Role;
 import com.example.demo.exception.ApplicationException;
 import com.example.demo.exception.ErrorCode;
+import com.example.demo.repository.RoleRepostiory;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.dto.request.UserCreateRequest;
 import com.example.demo.dto.request.UserUpdateRequest;
@@ -30,6 +31,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class UserService {
+    RoleRepostiory roleRepostiory;
 
     UserRepository userRepository;
     UserMapper userMapper;
@@ -51,7 +53,7 @@ public class UserService {
 
         HashSet<String> roles = new HashSet<>();
         roles.add(Role.USER.name());
-        user.setRoles(roles);
+       // user.setRoles(roles);
 
         return userMapper.toUserResponse(userRepository.save(user));
     }
@@ -73,6 +75,10 @@ public class UserService {
     public UserResponse updateUser(String id, UserUpdateRequest request){
         User user = userMapper.toUser(getUser(id));
         userMapper.updateUser(user,request);
+        user.setPassWord(passwordEncoder.encode(request.getPassWord()));
+        System.out.println(user.getPassWord());
+        var roles = roleRepostiory.findAllById(request.getRoles());
+        user.setRoles(new HashSet<>(roles));
         return userMapper.toUserResponse(userRepository.save(user));
     }
     public UpdatePasswordResponse updatePassword(UpdatePasswordRequest request){

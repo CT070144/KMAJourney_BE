@@ -28,8 +28,6 @@ public class ApplicationInitConfig {
                 roles.add(Role.ADMIN.name());
                 User user = User.builder()
                         .userName("admin")
-                        .passWord(passwordEncoder.encode("123123"))
-                        .roles(roles)
                         .build();
                 userRepository.save(user);
 

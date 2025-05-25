@@ -6,14 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
-    String firstName;
-    String lastName;
+
+    String fullName;
     String passWord;
     LocalDate dob;
+    List<String> roles;
 
 }

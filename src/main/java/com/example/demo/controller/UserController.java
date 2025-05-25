@@ -52,7 +52,9 @@ public class UserController {
                 .build();
     }
     @GetMapping()
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")  // @PreAuthorize("hasAuthority('APPROVE_POST')"
+    //hasAuthority chiếu khớp với bất kì trường nào claims scope
+    //hasRole chiếu khớp với trường có prefix ROLE_
     APIResponse<List<UserResponse>> getUsers(){
         return APIResponse.<List<UserResponse>>builder()
                 .result(userService.getUsers())

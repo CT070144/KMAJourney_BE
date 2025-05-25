@@ -1,9 +1,6 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -27,6 +24,8 @@ public class User {
      String gender;
      String userName;
      String passWord;
-     Set<String> roles;
+
+     @ManyToMany
+     Set<Role> roles;
 
 }
