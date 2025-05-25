@@ -1,5 +1,6 @@
 package com.example.demo.dto.request;
 
+import com.example.demo.customAnotation.DobConstraint;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ public class UserUpdateRequest {
 
     String fullName;
     String passWord;
+    @DobConstraint(min=18,message = "DOB_INVALID")
     LocalDate dob;
     List<String> roles;
 
