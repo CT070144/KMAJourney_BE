@@ -5,9 +5,9 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
-public class IntrospectRequest {
+@AllArgsConstructor
+public class LogoutRequest {
     String token;
 }

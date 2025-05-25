@@ -17,7 +17,7 @@ import java.util.HashSet;
 @Slf4j
 @Configuration
 public class ApplicationInitConfig {
-    @Autowired
+
     PasswordEncoder passwordEncoder;
     @Bean
     ApplicationRunner applicationRunner(UserRepository userRepository){
