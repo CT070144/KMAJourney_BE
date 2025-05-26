@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.request.AuthenticationRequest;
 import com.example.demo.dto.request.IntrospectRequest;
 import com.example.demo.dto.request.LogoutRequest;
+import com.example.demo.dto.request.RefreshTokenRequest;
 import com.example.demo.dto.response.APIResponse;
 import com.example.demo.dto.response.AuthenticationResponse;
 import com.example.demo.dto.response.IntrospectResponse;
@@ -48,5 +49,11 @@ public class AuthenticationController {
         LogoutRequest logoutRequest = new LogoutRequest(bearerToken);
         authenticationService.logout(logoutRequest);
         return APIResponse.<Void>builder().build();
+    }
+    @PostMapping("/refresh")
+    APIResponse<AuthenticationResponse> refresh(@RequestBody RefreshTokenRequest request) throws ParseException, JOSEException {
+       return APIResponse.<AuthenticationResponse>builder()
+               .result(authenticationService.refreshToken(request))
+               .build();
     }
 }

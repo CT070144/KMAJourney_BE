@@ -4,6 +4,8 @@ server:
     context-path: /kmajourney
 jwt:
   signerKey: "CnP+5W7LSFedx46SUk5pG/QGnoSkpjgIpH9WAxz/p+WGWBL325ktsdRx02R4qQek"
+  VALID_DURATION: 15
+  REFRESHABLE_DURATION: 86400
 spring:
   datasource:
     url: "jdbc:mysql://127.0.0.1:3308/kmajourney"
