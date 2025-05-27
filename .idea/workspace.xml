@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9320ed5e-19e6-4a88-8f10-67ce0aeb5716" name="Changes" comment="logout token">
+    <list default="true" id="9320ed5e-19e6-4a88-8f10-67ce0aeb5716" name="Changes" comment="refresh token">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/demo/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/demo/service/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +91,10 @@
   </component>
   <component name="RunManager">
     <configuration name="DemoApplication" type="Application" factoryName="Application" nameIsGenerated="true">
+      <envs>
+        <env name="DATASOURCE_URL" value="jdbc:mysql://127.0.0.1:3308/kmajourney" />
+        <env name="SIGNER_KEY" value="CnP+5W7LSFedx46SUk5pG/QGnoSkpjgIpH9WAxz/p+WGWBL325ktsdRx02R4qQek" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.example.demo.DemoApplication" />
       <module name="demo" />
       <extension name="coverage">
@@ -177,7 +178,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748185617507</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="refresh token">
+      <option name="closed" value="true" />
+      <created>1748235417951</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1748235417951</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -187,6 +196,7 @@
     <MESSAGE value="Build role-permission" />
     <MESSAGE value="custom anotation &amp; get attribute anotation for errorcode" />
     <MESSAGE value="logout token" />
-    <option name="LAST_COMMIT_MESSAGE" value="logout token" />
+    <MESSAGE value="refresh token" />
+    <option name="LAST_COMMIT_MESSAGE" value="refresh token" />
   </component>
 </project>
