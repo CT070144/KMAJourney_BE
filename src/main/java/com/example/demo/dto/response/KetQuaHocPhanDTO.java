@@ -1,25 +1,17 @@
 package com.example.demo.dto.response;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import com.example.demo.entity.SinhVien;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
-@RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class KetQuaHocPhanDTO {
-     String ten_sinh_vien;
-     String ma_sinh_vien;
-     String lop;
-     String khoa;
-     String ten_hoc_phan;
-     Double diem_thanh_phan1;
-     Double diem_thanh_phan2;
-     Double diem_thi;
-     Double diem_tong_ket;
-     String diem_chu;
-     int hocKy;
+     SinhVien sinhVien;
+     List<DiemHocPhanDTO> diem;
 }

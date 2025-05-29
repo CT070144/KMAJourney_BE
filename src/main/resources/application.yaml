@@ -4,7 +4,7 @@ server:
     context-path: /kmajourney
 jwt:
   signerKey: "${SIGNER_KEY}"
-  VALID_DURATION: 15
+  VALID_DURATION: 3600
   REFRESHABLE_DURATION: 86400
 spring:
   datasource:
@@ -13,7 +13,7 @@ spring:
     password: root
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     show-sql: true
   mail:
     host: smtp.gmail.com
